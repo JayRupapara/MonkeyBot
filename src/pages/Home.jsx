@@ -65,23 +65,30 @@ const Home = () => {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto flex flex-col items-center p-4">
+      <main className="flex-1 overflow-y-auto flex flex-col items-center p-4 ">
         {/* Monkey Icon and Score */}
         <img src={Logo} alt="Monkey Logo" className="h-36" />
         <h1 className="text-4xl font-bold mt-2">99,999 MONKEYS</h1>
 
         {/* Buttons for Rewards, Tasks, Invites */}
-        <div className="flex space-x-4 mt-4">
-          <button className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow-md">Your Reward<br />9.9K</button>
-          <button className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow-md">Tasks<br />29.9K</button>
-          <button className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow-md">Invites<br />59.9K</button>
-        </div>
+        <div className="flex space-x-4 mt-4 w-full justify-between">
+  <button className="bg-gradient-to-r from-blue-900 to-blue-500 hover:from-blue-500 hover:to-blue-300 text-white w-1/3 py-2 rounded-lg shadow-md text-center">
+    <FaEye className="inline-block mr-2" />Your Reward<br />9.9K
+  </button>
+  <button className="bg-gradient-to-r from-green-900 to-green-500 hover:from-green-500 hover:to-green-300 text-white w-1/3 py-2 rounded-lg shadow-md text-center">
+    <FaUsers className="inline-block mr-2" />Tasks<br />29.9K
+  </button>
+  <button className="bg-gradient-to-r from-yellow-900 to-orange-500 hover:from-orange-500 hover:to-orange-300 text-white w-1/3 py-2 rounded-lg shadow-md text-center">
+    <FaBell className="inline-block mr-2" />Invites<br />59.9K
+  </button>
+</div>
+
 
         {/* Daily Tasks */}
-        <section className="mt-8 w-full">
+        <section className="my-4 w-full">
           <h2 className="text-lg font-bold">Your Daily Tasks</h2>
 
-          <div className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md">
+          <div className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md border border-white">
             <div>
               <p className="text-sm">MAKE TON TRANSACTION</p>
               <p className="text-xs text-gray-400">+10,000 MONKEYS | 1 COMPLETE</p>
@@ -90,9 +97,9 @@ const Home = () => {
           </div>
 
           {/* Additional Tasks */}
-          <h2 className="text-lg font-bold mt-8">Tasks</h2>
+          <h2 className="text-lg font-bold my-4">Tasks</h2>
 
-          <div className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md">
+          <div className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md border border-white">
             <div>
               <p className="text-sm">INVITE FRIENDS</p>
               <p className="text-xs text-gray-400">+20,000 MONKEYS | 1/5 COMPLETE</p>
@@ -104,7 +111,7 @@ const Home = () => {
 
           {/* Add more task cards here as needed... */}
           {[...Array(10)].map((_, index) => (
-            <div key={index} className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md">
+            <div key={index} className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md border border-white">
               <div>
                 <p className="text-sm">JOIN OUR TELEGRAM COMMUNITY</p>
                 <p className="text-xs text-gray-400">+1,000 MONKEYS</p>
