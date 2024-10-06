@@ -13,7 +13,7 @@ const Invite = () => {
       </div>
 
       {/* Bottom Navigation */}
-      <Navigation />
+      <Navigation className="sticky bottom-0" />
     </div>
   );
 };

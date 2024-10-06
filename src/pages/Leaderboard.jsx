@@ -8,7 +8,7 @@ const Leaderboard = () => {
       <p className="text-lg">Top users will be displayed here!</p>
 
       {/* Bottom Navigation */}
-      <Navigation />
+      <Navigation className="sticky bottom-0" />
     </div>
   );
 };

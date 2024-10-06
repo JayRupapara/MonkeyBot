@@ -1,27 +1,73 @@
-import React from 'react';
-import { FaEye, FaUsers } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaEye, FaUsers, FaBell, FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '../components/Navigation';
+import Logo from '../assets/Logo.jpg'; 
 
 const Home = () => {
   const navigate = useNavigate();
+  const [showNotifications, setShowNotifications] = useState(false);
 
   const handleInviteClick = () => {
     navigate('/Invite');
   };
 
+  const notifications = [
+    "You have a new message from Alice.",
+    "Your task 'Invite Friends' is due soon.",
+    "Don't forget to check your rewards!",
+    "You have a new message from Alice.",
+    "Your task 'Invite Friends' is due soon.",
+    "Don't forget to check your rewards!",
+    "You have a new message from Alice.",
+    "Your task 'Invite Friends' is due soon.",
+    "Don't forget to check your rewards!",
+    // Add more notifications as needed
+  ];
+
+  const toggleNotifications = () => {
+    setShowNotifications(!showNotifications);
+  };
+
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col justify-between">
+    <div className="bg-black text-white flex flex-col h-screen">
       {/* Header */}
-      <header className="flex items-center justify-between px-4 py-2">
-        <span className="text-sm">YOUR SCORE</span>
-        <img src="/path/to/eye-icon.png" alt="eye-icon" className="w-6 h-6" />
+      <header className="flex items-center justify-between px-8 py-4 bg-white text-black">
+        <h1 className="text-xl font-bold">Monkey Coin</h1>
+        <button onClick={toggleNotifications} className="text-black">
+          <FaBell className="w-6 h-6" />
+        </button>
       </header>
 
+      {/* Notification Popup */}
+      {showNotifications && (
+        <div className="fixed inset-0 flex h-fit justify-center z-50 shadow-lg">
+          <div className="bg-white text-black rounded-lg shadow-lg w-11/12 md:w-2/5 p-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-bold">Notifications</h2>
+              <button onClick={toggleNotifications}>
+                <FaTimes className="w-5 h-5 text-black" />
+              </button>
+            </div>
+            <div className="max-h-60 overflow-y-auto">
+              {notifications.length === 0 ? (
+                <p>No notifications</p>
+              ) : (
+                notifications.map((notification, index) => (
+                  <div key={index} className="p-2 border-b border-gray-300">
+                    {notification}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Main Content */}
-      <main className="flex flex-col items-center">
+      <main className="flex-1 overflow-y-auto flex flex-col items-center p-4">
         {/* Monkey Icon and Score */}
-        <img src="/path/to/monkey-icon.png" alt="Monkey Logo" className="w-24 h-24" />
+        <img src={Logo} alt="Monkey Logo" className="h-36" />
         <h1 className="text-4xl font-bold mt-2">99,999 MONKEYS</h1>
 
         {/* Buttons for Rewards, Tasks, Invites */}
@@ -32,7 +78,7 @@ const Home = () => {
         </div>
 
         {/* Daily Tasks */}
-        <section className="mt-8 w-full px-4">
+        <section className="mt-8 w-full">
           <h2 className="text-lg font-bold">Your Daily Tasks</h2>
 
           <div className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md">
@@ -56,18 +102,23 @@ const Home = () => {
             </button>
           </div>
 
-          <div className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md">
-            <div>
-              <p className="text-sm">JOIN OUR TELEGRAM COMMUNITY</p>
-              <p className="text-xs text-gray-400">+1,000 MONKEYS</p>
+          {/* Add more task cards here as needed... */}
+          {[...Array(10)].map((_, index) => (
+            <div key={index} className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md">
+              <div>
+                <p className="text-sm">JOIN OUR TELEGRAM COMMUNITY</p>
+                <p className="text-xs text-gray-400">+1,000 MONKEYS</p>
+              </div>
+              <button className="bg-blue-500 hover:bg-blue-400 px-4 py-1 text-xs rounded-lg shadow-md">JOIN</button>
             </div>
-            <button className="bg-blue-500 hover:bg-blue-400 px-4 py-1 text-xs rounded-lg shadow-md">JOIN</button>
-          </div>
+          ))}
         </section>
       </main>
 
       {/* Bottom Navigation */}
-      <Navigation />
+      <div className="sticky bottom-0">
+        <Navigation />
+      </div>
     </div>
   );
 };
