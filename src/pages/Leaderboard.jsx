@@ -1,8 +1,12 @@
 import React from "react";
 import Navigation from "../components/Navigation";
+import { useMonkeyContext } from '../components/MonkeyContext'; // Importing context
+
 
 const Leaderboard = () => {
   // Create an array of 100 dummy users
+  const { monkeyCoins } = useMonkeyContext(); // Access monkeyCoins from context
+
   const users = Array.from({ length: 100 }, (_, index) => ({
     name: `USER ${index + 1}`,
     monkeys: 999999,
@@ -25,7 +29,7 @@ const Leaderboard = () => {
             />
             <div>
               <p className="font-semibold">RONAK KAVAR</p>
-              <p className="text-sm">99,999 MONKEYS</p>
+              <p className="text-sm">{monkeyCoins.toLocaleString()} MONKEYS</p>
             </div>
           </div>
           <p className="text-2xl font-bold">#9</p>
