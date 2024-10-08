@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaUsers, FaUser } from 'react-icons/fa';
+// import React from 'react';
+import { FaUser } from 'react-icons/fa';
 import Navigation from '../components/Navigation';
 import Logo from '../assets/Logo.png'; // Use the correct path for your monkey logo
 

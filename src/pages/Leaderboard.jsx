@@ -1,15 +1,18 @@
-import React from "react";
+// Import necessary dependencies
+// import React from "react";
 import Navigation from "../components/Navigation";
-import { useMonkeyContext } from '../components/MonkeyContext'; // Importing context
-
+// Correct import
+import { useMonkey } from '../components/MonkeyContext'; // Ensure this matches the actual export
 
 const Leaderboard = () => {
-  // Create an array of 100 dummy users
-  const { monkeyCoins } = useMonkeyContext(); // Access monkeyCoins from context
+  // Access monkeyCoins from the MonkeyContext using the useMonkey hook
+  const { state } = useMonkey(); // Assuming monkeyCoins are part of state
+  const monkeyCoins = state.monkeyCoins; // Destructuring the coins from the state
 
+  // Create an array of 100 dummy users for the leaderboard
   const users = Array.from({ length: 100 }, (_, index) => ({
     name: `USER ${index + 1}`,
-    monkeys: 999999,
+    monkeys: 999999, // Static value for monkeys, can be updated based on real data
     rank: index + 1,
   }));
 
@@ -17,7 +20,7 @@ const Leaderboard = () => {
     <div className="min-h-screen bg-black text-white flex flex-col justify-between">
       <div className="w-[90%] mx-auto">
         {/* Title */}
-        <h1 className="text-xl font-bold mt-6">TELEGRAM WALL OF FRAME</h1>
+        <h1 className="text-xl font-bold mt-6">TELEGRAM WALL OF FAME</h1>
         
         {/* Top User Card */}
         <div className="bg-gray-800 rounded-lg flex items-center justify-between w-full p-4 mt-4 shadow-lg border border-white">
@@ -29,7 +32,8 @@ const Leaderboard = () => {
             />
             <div>
               <p className="font-semibold">RONAK KAVAR</p>
-              <p className="text-sm">{monkeyCoins.toLocaleString()} MONKEYS</p>
+              {/* Display the actual monkeyCoins value from the context */}
+              <p className="text-sm">{monkeyCoins?.toLocaleString() || 0} MONKEYS</p>
             </div>
           </div>
           <p className="text-2xl font-bold">#9</p>

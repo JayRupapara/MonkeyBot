@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Navigation from '../components/Navigation';
-import { useMonkeyContext } from '../components/MonkeyContext'; // Adjusted import
+import { useMonkey } from '../components/MonkeyContext'; // Adjusted import
 
 const Games = () => {
   const [pointsEarned, setPointsEarned] = useState(0);
-  const { setMonkeyCoins } = useMonkeyContext(); // Use the context
+  const { setMonkeyCoins } = useMonkey(); // Use the context
 
   const handleGameWin = () => {
     const earnedPoints = Math.floor(Math.random() * 100); // Random points

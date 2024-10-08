@@ -1,22 +1,25 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
+import PropTypes from 'prop-types';  // Import PropTypes
 
 const MonkeyContext = createContext();
 
-export const MonkeyProvider = ({ children }) => {
-  const [monkeyCoins, setMonkeyCoins] = useState(() => {
-    const savedCoins = localStorage.getItem('monkeyCoins');
-    return savedCoins ? JSON.parse(savedCoins) : 0; // Initial value
-  });
+export const useMonkey = () => {
+  return useContext(MonkeyContext);
+};
 
-  useEffect(() => {
-    localStorage.setItem('monkeyCoins', JSON.stringify(monkeyCoins));
-  }, [monkeyCoins]);
+export const MonkeyProvider = ({ children }) => {
+  const [monkeyCoins, setMonkeyCoins] = useState(0); // Initialize MonkeyCoins state
 
   return (
     <MonkeyContext.Provider value={{ monkeyCoins, setMonkeyCoins }}>
-      {children}
+      {children}  {/* Render children here */}
     </MonkeyContext.Provider>
   );
 };
 
-export const useMonkeyContext = () => useContext(MonkeyContext);
+// Add propTypes validation
+MonkeyProvider.propTypes = {
+  children: PropTypes.node.isRequired,  // Validate that children is provided and it's a node (JSX)
+};
+
+export default MonkeyProvider;
