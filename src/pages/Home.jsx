@@ -5,31 +5,40 @@ import Navigation from "../components/Navigation";
 import Logo from "../assets/Logo.png";
 import Toncoin from "../assets/Toncoin.png";
 import { useMonkey } from '../components/MonkeyContext';
-import Popup from "../components/PopUp"; // Import the Popup component
+import Popup from "../components/PopUp"; 
 
 const Home = () => {
   const navigate = useNavigate();
-  const { monkeyCoins, setMonkeyCoins } = useMonkey(); // Access and update monkeyCoins from context
-  const [showPopup, setShowPopup] = useState(false); // Popup visibility state
+  const { monkeyCoins, setMonkeyCoins } = useMonkey(); 
+  const [showPopup, setShowPopup] = useState(false); 
   const rewards = 1000; // Example reward value
+  console.log('you have '+ {monkeyCoins});
 
+  // Handle navigation to the Invite page
   const handleInviteClick = () => {
     navigate("/Invite");
   };
 
+  // Handle showing the popup when clicking "Continue"
   const handleContinueClick = () => {
-    setShowPopup(true); // Show popup on "Continue"
+    setShowPopup(true); 
   };
 
+  // Handle closing the popup and updating Monkey Coins
   const handleClosePopup = () => {
-    setShowPopup(false); // Close popup
-    navigate('/'); // Navigate to the Home page after popup closes
+    console.log("Popup closed"); // Debugging statement
+    updateCoins(rewards);  // Add rewards to monkeyCoins
+    setShowPopup(false);   // Close popup
+    navigate('/');         // Redirect to home page after closing the popup
   };
-
-  // Function to update Monkey Coins in the context
+  
+  // Update Monkey Coins in context
   const updateCoins = (newCoins) => {
-    setMonkeyCoins(prevCoins => prevCoins + newCoins); // Add new rewards to existing coins
+    console.log("updateCoins in Home before passing to Popup:", updateCoins); // Should log the function
+    setMonkeyCoins(prevCoins => prevCoins + newCoins); // Ensure this logic exists
   };
+  
+  
 
   return (
     <div className="bg-black text-white flex flex-col h-screen">
@@ -40,10 +49,11 @@ const Home = () => {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto flex flex-col items-center p-4">
-        {/* Monkey Icon and Score */}
+        {/* Monkey Coins Display */}
         <h1 className="text-4xl font-bold">{monkeyCoins.toLocaleString()} MONKEYS</h1>
         <img src={Logo} alt="Monkey Logo" className="h-44" />
         
+        {/* Buttons for Actions */}
         <div className="flex space-x-4 w-full justify-between mt-6">
           <button className="border bg-gray-800 text-white w-1/3 py-2 rounded-lg shadow-md text-center" onClick={handleContinueClick}>
             <FaEye className="inline-block mr-2" />
@@ -65,10 +75,11 @@ const Home = () => {
           </button>
         </div>
 
-        {/* Daily Tasks */}
+        {/* Daily Tasks Section */}
         <section className="my-4 w-full">
           <h2 className="text-lg font-bold">Your Daily Tasks</h2>
 
+          {/* Sample Task Card */}
           <div className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md border border-white">
             <div>
               <p className="text-sm">MAKE TON TRANSACTION</p>
@@ -77,9 +88,8 @@ const Home = () => {
             <img src={Toncoin} alt="TON" className="h-10" />
           </div>
 
-          {/* Additional Tasks */}
+          {/* Invite Task */}
           <h2 className="text-lg font-bold my-4">Tasks</h2>
-
           <div className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md border border-white">
             <div>
               <p className="text-sm">INVITE FRIENDS</p>
@@ -90,7 +100,7 @@ const Home = () => {
             </button>
           </div>
 
-          {/* Add more task cards here as needed... */}
+          {/* Additional Tasks (Loop for Multiple Tasks) */}
           {[...Array(10)].map((_, index) => (
             <div key={index} className="bg-gray-800 p-4 mt-4 rounded-lg flex justify-between items-center shadow-md border border-white">
               <div>
@@ -104,15 +114,25 @@ const Home = () => {
           ))}
         </section>
       </main>
-      
+
       {/* Bottom Navigation */}
       <div className="sticky bottom-0">
         <Navigation />
+        
       </div>
 
-      {/* Popup for rewards */}
-      {showPopup && <Popup onClose={handleClosePopup} rewards={rewards} updateCoins={updateCoins} />}
-    </div>
+      {/* Popup for Rewards */}
+      {
+      showPopup && (
+        
+  <Popup
+    onClose={handleClosePopup}
+    rewards={rewards}
+    updateCoins={updateCoins} // This function should be passed properly
+  />
+)}
+
+      </div>
   );
 };
 

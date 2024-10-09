@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 
 const Popup = ({ onClose, rewards, updateCoins }) => {
-  const handlePopupClose = () => {
-    updateCoins(rewards);  // Add the rewards to total Monkey Coins
+  console.log("Received updateCoins in Popup:", updateCoins); // Should log the function
+
+  const handleClosePopup = () => {
+    updateCoins(rewards);  // Update the coins
     onClose();  // Close the popup
   };
 
@@ -14,7 +16,7 @@ const Popup = ({ onClose, rewards, updateCoins }) => {
           You have earned <span className="font-semibold">{rewards}</span> Monkey Coins!
         </p>
         <button
-          onClick={handlePopupClose}
+          onClick={handleClosePopup} // This triggers the close action
           className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded"
         >
           Close
@@ -24,10 +26,11 @@ const Popup = ({ onClose, rewards, updateCoins }) => {
   );
 };
 
+// PropTypes validation
 Popup.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,  // Correct prop name
   rewards: PropTypes.number.isRequired,
-  updateCoins: PropTypes.func.isRequired,  // Add this to validate the prop for updating coins
+  updateCoins: PropTypes.func.isRequired,  // Ensure this is being passed correctly
 };
 
 export default Popup;

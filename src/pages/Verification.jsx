@@ -1,20 +1,19 @@
 import { useState } from 'react';
-import Popup from '../components/PopUp'; // Import the Popup component
-import { useNavigate } from 'react-router-dom';
-// import PropTypes from 'prop-types'; // Import PropTypes for validation
+import Popup from '../components/PopUp'; 
+import PropTypes from 'prop-types';
+import { useMonkey } from '../components/MonkeyContext';  // Import the context hook
 
-const Verification = () => { // Remove 'onContinue' as it's not used
-
-  const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
-  const navigate = useNavigate(); // For navigating to the home page
+const Verification = ({ onContinue }) => {  
+  const [showPopup, setShowPopup] = useState(false); 
+  const { updateCoins } = useMonkey();  // Retrieve updateCoins from context
 
   const handleContinue = () => {
     setShowPopup(true); // Show popup when "Continue" is clicked
   };
 
   const handleClosePopup = () => {
-    setShowPopup(false); // Hide popup when closed
-    navigate('/'); // Navigate to the home page after popup is closed
+    setShowPopup(false); 
+    onContinue(); // Pass control back to parent (App) to mark verification as completed
   };
 
   return (
@@ -41,14 +40,14 @@ const Verification = () => { // Remove 'onContinue' as it's not used
       <button onClick={handleContinue} className="continue-button">
         Continue
       </button>
-      {showPopup && <Popup onClose={handleClosePopup} rewards={4379} />}
+      {showPopup && <Popup onClose={handleClosePopup} rewards={4379} updateCoins={updateCoins} />} {/* Pass updateCoins here */}
     </div>
   );
 };
 
-// You can remove this, as 'onContinue' is no longer used
-// Verification.propTypes = {
-//   onContinue: PropTypes.func.isRequired,
-// };
+// PropTypes validation
+Verification.propTypes = {
+  onContinue: PropTypes.func.isRequired,
+};
 
 export default Verification;
