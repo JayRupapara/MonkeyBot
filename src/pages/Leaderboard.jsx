@@ -1,14 +1,10 @@
-// Import necessary dependencies
 // import React from "react";
 import Navigation from "../components/Navigation";
-// Correct import
-import { useMonkey } from '../components/MonkeyContext'; // Ensure this matches the actual export
+import { useMonkey } from '../components/MonkeyContext'; // Correct import
 
 const Leaderboard = () => {
-  // Access monkeyCoins from the MonkeyContext using the useMonkey hook
-  const { state } = useMonkey(); // Assuming monkeyCoins are part of state
-const monkeyCoins = state?.monkeyCoins || 0;
- // Destructuring the coins from the state
+  // Correctly access monkeyCoins from the MonkeyContext
+  const { monkeyCoins } = useMonkey();
 
   // Create an array of 100 dummy users for the leaderboard
   const users = Array.from({ length: 100 }, (_, index) => ({
@@ -34,7 +30,7 @@ const monkeyCoins = state?.monkeyCoins || 0;
             <div>
               <p className="font-semibold">RONAK KAVAR</p>
               {/* Display the actual monkeyCoins value from the context */}
-              <p className="text-sm">{monkeyCoins?.toLocaleString() || 0} MONKEYS</p>
+              <p className="text-sm">{monkeyCoins?.toLocaleString()} MONKEYS</p>
             </div>
           </div>
           <p className="text-2xl font-bold">#9</p>

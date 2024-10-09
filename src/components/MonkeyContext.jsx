@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Create a MonkeyContext
@@ -17,21 +17,9 @@ export const useMonkey = () => {
 export const MonkeyProvider = ({ children }) => {
   const [monkeyCoins, setMonkeyCoins] = useState(0); // Initialize monkeyCoins state
 
-  // On component mount, retrieve coins from localStorage
-  useEffect(() => {
-    const storedCoins = localStorage.getItem('monkeyCoins');
-    if (storedCoins) {
-      setMonkeyCoins(Number(storedCoins)); // Initialize state with the stored value
-    }
-  }, []);
-
-  // Function to update coins and store the updated value in localStorage
+  // Function to update coins (without localStorage)
   const updateCoins = (newCoins) => {
-    setMonkeyCoins((prevCoins) => {
-      const updatedCoins = prevCoins + newCoins;
-      localStorage.setItem('monkeyCoins', updatedCoins); // Store the updated value
-      return updatedCoins;
-    });
+    setMonkeyCoins((prevCoins) => prevCoins + newCoins);
   };
 
   // Utility function to format large numbers
