@@ -50,14 +50,14 @@ const Home = () => {
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto flex flex-col items-center p-4">
         {/* Monkey Coins Display */}
-        <h1 className="text-4xl font-bold">{monkeyCoins.toLocaleString()} MONKEYS</h1>
-        <img src={Logo} alt="Monkey Logo" className="h-44" />
+        <h1 className="text-3xl font-bold">{monkeyCoins.toLocaleString()} MONKEYS</h1>
+        <img src={Logo} alt="Monkey Logo" className="h-36" />
         
         {/* Buttons for Actions */}
         <div className="flex space-x-4 w-full justify-between mt-6">
           <button className="border bg-gray-800 text-white w-1/3 py-2 rounded-lg shadow-md text-center" onClick={handleContinueClick}>
             <FaEye className="inline-block mr-2" />
-            Your Reward
+            Total
             <br />
             {monkeyCoins.toLocaleString()}
           </button>

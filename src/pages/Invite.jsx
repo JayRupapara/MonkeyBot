@@ -20,11 +20,11 @@ const Invite = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col justify-between items-center">
       {/* Invite Friends Section */}
-      <div className="flex flex-col items-center mt-8">
+      <div className="flex flex-col items-center mt-8 mx-auto ">
         <img src={Logo} alt="Monkey Logo" className="h-36" />
-        <h2 className="text-xl font-bold mt-4 text-center">INVITE FRIENDS AND GETS MORE MONKEYS</h2>
+        <h2 className="text-xl font-bold mt-4 text-center mx-2">INVITE FRIENDS AND GETS MORE MONKEYS</h2>
         
-        <button className="bg-gray-200 text-black px-6 py-2 mt-4 rounded-full shadow-md hover:bg-gray-300 focus:outline-none">
+        <button className="bg-white text-black px-6 py-2 mt-4 rounded-full shadow-md hover:bg-gray-300 focus:outline-none">
           INVITE FRIENDS
         </button>
       </div>

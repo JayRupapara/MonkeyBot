@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { MonkeyProvider } from './components/MonkeyContext';  // Import context provider
 import Invite from './pages/Invite';
@@ -11,8 +11,17 @@ import './index.css';
 const App = () => {
   const [verified, setVerified] = useState(false); // Track if verification is completed
 
+  useEffect(() => {
+    // Check if the user is already verified in localStorage
+    const isVerified = localStorage.getItem('verified');
+    if (isVerified === 'true') {
+      setVerified(true);
+    }
+  }, []);
+
   const handleContinueVerification = () => {
-    setVerified(true); // Mark verification as done after popup
+    setVerified(true);
+    localStorage.setItem('verified', 'true'); // Store verification status in localStorage
   };
 
   return (

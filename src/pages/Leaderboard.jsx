@@ -7,7 +7,8 @@ import { useMonkey } from '../components/MonkeyContext'; // Ensure this matches 
 const Leaderboard = () => {
   // Access monkeyCoins from the MonkeyContext using the useMonkey hook
   const { state } = useMonkey(); // Assuming monkeyCoins are part of state
-  const monkeyCoins = state.monkeyCoins; // Destructuring the coins from the state
+const monkeyCoins = state?.monkeyCoins || 0;
+ // Destructuring the coins from the state
 
   // Create an array of 100 dummy users for the leaderboard
   const users = Array.from({ length: 100 }, (_, index) => ({
