@@ -4,7 +4,7 @@ import { FaHome, FaTrophy, FaUsers, FaGamepad } from 'react-icons/fa';
 
 const Navigation = () => {
   return (
-    <nav className="w-full flex justify-around py-4 bg-white">
+    <nav className="w-[90%] mx-auto mb-3 rounded-full flex justify-around py-4 bg-white">
       <NavLink 
         to="/" 
         className={({ isActive }) => `flex flex-col items-center ${isActive ? 'text-black' : 'text-gray-500 hover:text-black'}`}
